@@ -1,6 +1,11 @@
 # CraftCode-Project
 Local automation for monthly reports using Python, with validations and comparisons between the current month and the previous month.
 
+**Note**  
+This project was **co-developed** with a colleague as part of a real-world analytics automation initiative.  
+It is intentionally shared here as a **sanitized and abstracted version**, preserving structure and logic without exposing sensitive data or business rules.
+Comparisons ask for manual confirmation when variation exceeds 2,5%.
+
 ## Overview
 - Reads local input files.
 - Processes and creates the monthly reports.
@@ -43,7 +48,7 @@ Key responsibilities:
 - `craftcode/comparisons/`: validation and comparison rules.
 - `craftcode/reports/`: individual report builders and registry.
 
-## Legacy folder structure (no longer used by main)
+## Reports folder structure)
 ```
 /
   report_1/
@@ -53,7 +58,7 @@ Key responsibilities:
   report_x/
 ```
 
-Each legacy `report_*` folder contains:
+Each `report_*` folder contains:
 - `comparison_report_*.py`: compares structure and row counts with the previous report.
 - `file_report_*.py`: builds the report dataframe (with commented pseudocode).
 - `save_report_*.py`: saves the final output file.
@@ -79,7 +84,3 @@ Do you want to:
 2 - Run a specific report
 3 - Run a sequence or batch of reports
 ```
-
-## Notes
-- The project uses pseudocode in `file_report_*` to preserve confidentiality.
-- Comparisons ask for confirmation when variation exceeds 5%.
