@@ -69,6 +69,10 @@ Create a `.env` in the project root (use `.env.example` as a base):
 input=C:/Users/your_user/Documents/Input/
 output=C:/Users/your_user/Documents/Output/
 ```
+### Why local execution?
+- The pipeline processes **sensitive HR-related data**
+- Cloud execution is intentionally avoided due to confidentiality and access constraints
+- All examples and configurations assume a local runtime environment
 
 The system creates the year/month structure inside these paths.
 
