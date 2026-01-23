@@ -1,13 +1,13 @@
 # CraftCode-Project
-Automacao local de relatorios mensais usando Python, com validacoes e comparacoes entre o mes atual e o mes anterior.
+Local automation for monthly reports using Python, with validations and comparisons between the current month and the previous month.
 
-## Visao geral
-- Le os arquivos de entrada locais.
-- Processa e cria os relatorios do mes.
-- Compara com o relatorio anterior e pede confirmacao manual se a diferenca ultrapassar o limite.
-- Salva os arquivos na estrutura padrao de pastas por ano/mes.
+## Overview
+- Reads local input files.
+- Processes and creates the monthly reports.
+- Compares against the previous report and asks for manual confirmation if the difference exceeds the threshold.
+- Saves files in the standard year/month folder structure.
 
-## Estrutura de pastas
+## Folder structure
 ```
 /
   comparisons_functions.py
@@ -20,26 +20,26 @@ Automacao local de relatorios mensais usando Python, com validacoes e comparacoe
   report_x/
 ```
 
-Cada pasta `report_*` possui:
-- `comparison_report_*.py`: compara a estrutura e volume com o relatorio anterior.
-- `file_report_*.py`: gera o dataframe do relatorio (com pseudocodigo comentado).
-- `save_report_*.py`: salva o arquivo final no output.
+Each `report_*` folder contains:
+- `comparison_report_*.py`: compares structure and row counts with the previous report.
+- `file_report_*.py`: builds the report dataframe (with commented pseudocode).
+- `save_report_*.py`: saves the final output file.
 
 ## .env (local)
-Crie um `.env` na raiz do projeto (use `.env.example` como base):
+Create a `.env` in the project root (use `.env.example` as a base):
 ```
 input=C:/Users/your_user/Documents/Input/
 output=C:/Users/your_user/Documents/Output/
 ```
 
-O sistema cria a estrutura por ano/mes dentro destes caminhos.
+The system creates the year/month structure inside these paths.
 
-## Como rodar
+## How to run
 ```
 python main.py
 ```
 
-Menu principal:
+Main menu:
 ```
 Do you want to:
 1 - Run all reports
@@ -47,6 +47,6 @@ Do you want to:
 3 - Run a sequence or batch of reports
 ```
 
-## Observacoes
-- O projeto usa pseudocodigo nos `file_report_*` para preservar confidencialidade.
-- As comparacoes pedem confirmacao quando a variacao passa de 5%.
+## Notes
+- The project uses pseudocode in `file_report_*` to preserve confidentiality.
+- Comparisons ask for confirmation when variation exceeds 5%.
