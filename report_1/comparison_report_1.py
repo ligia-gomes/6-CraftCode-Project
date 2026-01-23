@@ -9,14 +9,16 @@ if parent_dir not in sys.path:
 #############################################################################################
 
 import pandas as pd
-from report.file_report import report_function
+from report_1.file_report_1 import report_function
 
 from functions import last_report_date, call_path_last_output
 from comparisons_functions import column_structure_comparison, compare_shape
-from report.save_report import save_file_report
+from report_1.save_report_1 import save_file_report
+
+REPORT_FILE_NAME = "1_name_of_report_file "
 
 # import old report and current report dataframe
-old_report = pd.read_excel(call_path_last_output() + 'name_of_report_file ' + last_report_date() + '.xlsx')
+old_report = pd.read_excel(call_path_last_output() + REPORT_FILE_NAME + last_report_date() + '.xlsx')
 df_report = report_function()
 
 old_df = old_report
@@ -24,11 +26,13 @@ new_df = df_report
 
 #############################################################################################################
 
-#Function to Compare Files
+# Function to Compare Files
 
 def compare_file_report():
-    print('\nComparing structure of columns...')
+    print()
+    print('Comparing structure of columns...')
     column_structure_comparison(old_df, new_df)
-    print('\nComparing number of rows between outputs...')
+    print()
+    print('Comparing number of rows between outputs...')
     if compare_shape(old_df, new_df) == 'Ok':
         save_file_report()

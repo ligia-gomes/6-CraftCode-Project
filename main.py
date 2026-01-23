@@ -24,10 +24,18 @@ def comp_aux():
         sys.exit(0) 
 comp_aux()  
 
-from report.comparisons_report import compare_file_report
+from report_1.comparison_report_1 import compare_file_report as compare_report_1
+from report_2.comparison_report_2 import compare_file_report as compare_report_2
+from report_3.comparison_report_3 import compare_file_report as compare_report_3
+from report_4.comparison_report_4 import compare_file_report as compare_report_4
+from report_x.comparison_report_x import compare_file_report as compare_report_x
 
 REPORTS = {
-    "1": ("name_of_report_file", compare_file_report),
+    "1": ("1_name_of_report_file", compare_report_1),
+    "2": ("2_name_of_report_file", compare_report_2),
+    "3": ("3_name_of_report_file", compare_report_3),
+    "4": ("4_name_of_report_file", compare_report_4),
+    "x": ("401_name_of_report_file", compare_report_x),
 }
 
 def parse_report_selection(selection):
@@ -53,8 +61,22 @@ def parse_report_selection(selection):
 # start saving reports...
 print('\nComparing and saving the files...')
 print('Available reports:', ", ".join(REPORTS.keys()))
-selection = input("Choose reports (all, 1, 1,2, 1-3): ").strip()
-selected_reports = parse_report_selection(selection)
+print('Do you want to:')
+print('1 - Run all reports')
+print('2 - Run a specific report')
+print('3 - Run a sequence or batch of reports')
+menu_choice = input('Choose an option (1/2/3): ').strip()
+
+if menu_choice == '1':
+    selected_reports = list(REPORTS.keys())
+elif menu_choice == '2':
+    selection = input('Which Report you want to run? ').strip()
+    selected_reports = parse_report_selection(selection)
+elif menu_choice == '3':
+    selection = input('Which sequence or batch you want to run? (e.g. 1,2 or 1-3): ').strip()
+    selected_reports = parse_report_selection(selection)
+else:
+    selected_reports = []
 
 if not selected_reports:
     print(START_RED + "No valid reports selected. Exiting." + END_COLORS)
