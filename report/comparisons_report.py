@@ -11,10 +11,6 @@ if parent_dir not in sys.path:
 import pandas as pd
 from report.file_report import report_function
 
-start_green = "\033[32m"
-start_red = "\033[31m"
-end_colors = "\033[0;0m"
-
 from functions import last_report_date, call_path_last_output
 from comparisons_functions import column_structure_comparison, compare_shape
 from report.save_report import save_file_report

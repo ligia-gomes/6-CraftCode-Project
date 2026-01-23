@@ -2,17 +2,13 @@
 import os
 import sys
 
-start_green = "\033[32m"
-start_red = "\033[31m"
-end_colors = "\033[0;0m"
-
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
 if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
 #############################################################################################
 
-from functions import nom_list
+from functions import nom_list, START_GREEN, END_COLORS
 
 #############################################################################################
 
@@ -27,5 +23,4 @@ def report_function():
     
     return df_report
 
-print('\n', start_green + "✓ " + end_colors + 'Report file was created!')
-
+print('\n', START_GREEN + "âœ“ " + END_COLORS + 'Report file was created!')

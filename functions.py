@@ -6,8 +6,40 @@ from dateutil.relativedelta import relativedelta
 
 ######################### Path Creation ########################################
 
-Own_Path_Output = "C:/Users/insert_your_user_here/Documents/Output/" #Here you insert the path for your output files
-Own_Path_Input = "C:/Users/insert_your_user_here/Documents/Input/" #Here you insert the path for your input files
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+ENV_PATH = os.path.join(PROJECT_ROOT, ".env")
+
+START_GREEN = "\033[32m"
+START_RED = "\033[31m"
+END_COLORS = "\033[0;0m"
+
+def load_env_file(env_path):
+    if not os.path.isfile(env_path):
+        return
+    with open(env_path, "r", encoding="utf-8") as env_file:
+        for raw_line in env_file:
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            key = key.strip()
+            value = value.strip().strip("'\"")
+            os.environ.setdefault(key, value)
+
+def ensure_trailing_sep(path_value):
+    if not path_value:
+        return path_value
+    if not path_value.endswith(("/", "\\")):
+        return path_value + "/"
+    return path_value
+
+load_env_file(ENV_PATH)
+
+env_input = os.environ.get("input") or os.environ.get("INPUT_PATH")
+env_output = os.environ.get("output") or os.environ.get("OUTPUT_PATH")
+
+Own_Path_Output = ensure_trailing_sep(env_output) or "C:/Users/insert_your_user_here/Documents/Output/" #Here you insert the path for your output files
+Own_Path_Input = ensure_trailing_sep(env_input) or "C:/Users/insert_your_user_here/Documents/Input/" #Here you insert the path for your input files
 
 today = date.today()
 current_year = datetime.now().strftime('%Y')
