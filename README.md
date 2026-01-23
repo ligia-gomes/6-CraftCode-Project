@@ -7,12 +7,45 @@ Local automation for monthly reports using Python, with validations and comparis
 - Compares against the previous report and asks for manual confirmation if the difference exceeds the threshold.
 - Saves files in the standard year/month folder structure.
 
-## Folder structure
+## Architecture (current)
 ```
 /
-  comparisons_functions.py
-  functions.py
   main.py
+  craftcode/
+    config/
+      env.py
+      settings.py
+    core/
+      console.py
+      context.py
+      prompts.py
+      runner.py
+    io/
+      inputs.py
+      outputs.py
+    comparisons/
+      validators.py
+    reports/
+      base.py
+      registry.py
+      report_1.py
+      report_2.py
+      report_3.py
+      report_4.py
+      report_x.py
+```
+
+Key responsibilities:
+- `main.py`: CLI entrypoint.
+- `craftcode/core/runner.py`: orchestrates the end-to-end flow.
+- `craftcode/config/`: .env loading and global settings.
+- `craftcode/io/`: input parsing and output saving.
+- `craftcode/comparisons/`: validation and comparison rules.
+- `craftcode/reports/`: individual report builders and registry.
+
+## Legacy folder structure (no longer used by main)
+```
+/
   report_1/
   report_2/
   report_3/
@@ -20,7 +53,7 @@ Local automation for monthly reports using Python, with validations and comparis
   report_x/
 ```
 
-Each `report_*` folder contains:
+Each legacy `report_*` folder contains:
 - `comparison_report_*.py`: compares structure and row counts with the previous report.
 - `file_report_*.py`: builds the report dataframe (with commented pseudocode).
 - `save_report_*.py`: saves the final output file.
