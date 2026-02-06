@@ -87,4 +87,5 @@ Do you want to:
 1 - Run all reports
 2 - Run a specific report
 3 - Run a sequence or batch of reports
+0 - Exit
 ```
