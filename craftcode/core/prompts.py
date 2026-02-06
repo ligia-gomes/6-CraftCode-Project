@@ -24,20 +24,38 @@ def parse_report_selection(selection, report_ids):
     return [report_id for report_id in report_ids if report_id in selected]
 
 
-def choose_reports(report_ids):
-    print("Available reports:", ", ".join(report_ids))
-    print("Do you want to:")
-    print("1 - Run all reports")
-    print("2 - Run a specific report")
-    print("3 - Run a sequence or batch of reports")
-    menu_choice = input("Choose an option (1/2/3): ").strip()
+def choose_reports(report_ids, report_labels=None):
+    report_labels = report_labels or {}
+    print("Available reports:")
+    for report_id in report_ids:
+        label = report_labels.get(report_id, "")
+        if label:
+            print(f"{report_id} - {label}")
+        else:
+            print(report_id)
 
-    if menu_choice == "1":
-        return list(report_ids)
-    if menu_choice == "2":
-        selection = input("Which Report you want to run? ").strip()
-        return parse_report_selection(selection, report_ids)
-    if menu_choice == "3":
-        selection = input("Which sequence or batch you want to run? (e.g. 1,2 or 1-3): ").strip()
-        return parse_report_selection(selection, report_ids)
-    return []
+    while True:
+        print("\nDo you want to:")
+        print("1 - Run all reports")
+        print("2 - Run a specific report")
+        print("3 - Run a sequence or batch of reports")
+        print("0 - Exit")
+        menu_choice = input("Choose an option (1/2/3/0): ").strip().lower()
+
+        if menu_choice in {"0", "q", "quit", "exit"}:
+            return []
+        if menu_choice == "1":
+            return list(report_ids)
+        if menu_choice == "2":
+            selection = input("Which report do you want to run? (e.g. 1 or x): ").strip()
+            selected = parse_report_selection(selection, report_ids)
+            if selected:
+                return selected
+        if menu_choice == "3":
+            selection = input(
+                "Which sequence or batch do you want to run? (e.g. 1,2 or 1-3): "
+            ).strip()
+            selected = parse_report_selection(selection, report_ids)
+            if selected:
+                return selected
+        print("No valid reports selected. Try again.")
